@@ -155,4 +155,4 @@ D:\tool\protobuf\include\google\protobuf\descriptor.h(1839): message : 参见“
 D:\tool\protobuf\include\google\protobuf\descriptor.h(1846,25): warning C4251: “google::protobuf::DescriptorPool::unused_import_track_files_”: class“std::set<std::string,std::less<std::string>,std::allocator<std::string>>”需要有 dll 接口由 class“google::protobuf::DescriptorPool”的客户端使用
 D:\tool\protobuf\include\google\protobuf\descriptor.h(1846): message : 参见“std::set<std::string,std::less<std::string>,std::allocator<std::string>>”的声明
   正在生成代码...
-  Protobuf.vcxproj -> E:\VS\Protobuf\Debug\Protobuf.exe
+  Protobuf.vcxproj -> E:\VS\SafetNet\Protobuf\Debug\Protobuf.exe
