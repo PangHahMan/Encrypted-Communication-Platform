@@ -1,9 +1,0 @@
-syntax = "proto3";
-// Persion类属于itheima这个命名空间
-package phw;
-
-message Info
-{
-    bytes address = 1;  // 地址
-    int32 number = 2;   // 门牌号
-}

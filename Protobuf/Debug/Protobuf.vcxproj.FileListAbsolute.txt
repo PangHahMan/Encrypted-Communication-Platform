@@ -1,2 +1,0 @@
-E:\VS\Protobuf\Debug\Protobuf.exe
-E:\VS\SafetNet\Protobuf\Debug\Protobuf.exe
