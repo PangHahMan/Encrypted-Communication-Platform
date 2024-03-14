@@ -17,7 +17,7 @@ enum HashType {
 
 class Hash {
 public:
-    //根据指定的哈希类型初始化相应的哈希上下文
+    // 根据指定的哈希类型初始化相应的哈希上下文
     Hash(HashType type) {
         m_type = type;
         switch (type) {
@@ -44,9 +44,11 @@ public:
                 break;
         }
     }
+
     ~Hash() {
     }
 
+    // 向哈希算法中添加数据
     void addData(string data) {
         switch (m_type) {
             case HashType::MD5:
@@ -73,6 +75,7 @@ public:
         }
     }
 
+    // 获取哈希结果
     string result() {
         string result = string();
         switch (m_type) {
@@ -102,15 +105,17 @@ public:
     }
 
 private:
-    // md5
+    // md5初始化
     inline void md5Init() {
         MD5_Init(&m_md5);
     }
 
+    // 向md5算法中添加数据
     inline void md5AddData(const char *data) {
         MD5_Update(&m_md5, data, strlen(data));
     }
 
+    // 获取md5哈希结果
     string md5Result() {
         unsigned char md[MD5_DIGEST_LENGTH];
         char res[MD5_DIGEST_LENGTH * 2 + 1];
@@ -121,15 +126,17 @@ private:
         return string(res, MD5_DIGEST_LENGTH * 2 + 1);
     }
 
-    // sha1
+    // sha1初始化
     inline void sha1Init() {
         SHA1_Init(&m_sha1);
     }
 
+    // 向sha1算法中添加数据
     inline void sha1AddData(const char *data) {
         SHA1_Update(&m_sha1, data, strlen(data));
     }
 
+    // 获取sha1哈希结果
     string sha1Result() {
         unsigned char md[SHA_DIGEST_LENGTH];
         char res[SHA_DIGEST_LENGTH * 2 + 1];
@@ -140,15 +147,17 @@ private:
         return string(res, SHA_DIGEST_LENGTH * 2 + 1);
     }
 
-    // sha224
+    // sha224初始化
     inline void sha224Init() {
         SHA224_Init(&m_sha224);
     }
 
+    // 向sha224算法中添加数据
     inline void sha224AddData(const char *data) {
         SHA224_Update(&m_sha224, data, strlen(data));
     }
 
+    // 获取sha224哈希结果
     string sha224Result() {
         unsigned char md[SHA224_DIGEST_LENGTH];
         char res[SHA224_DIGEST_LENGTH * 2 + 1];
@@ -159,15 +168,17 @@ private:
         return string(res, SHA224_DIGEST_LENGTH * 2 + 1);
     }
 
-    // sha256
+    // sha256初始化
     inline void sha256Init() {
         SHA256_Init(&m_sha256);
     }
 
+    // 向sha256算法中添加数据
     inline void sha256AddData(const char *data) {
         SHA256_Update(&m_sha256, data, strlen(data));
     }
 
+    // 获取sha256哈希结果
     string sha256Result() {
         unsigned char md[SHA256_DIGEST_LENGTH];
         char res[SHA256_DIGEST_LENGTH * 2 + 1];
@@ -178,15 +189,17 @@ private:
         return string(res, SHA256_DIGEST_LENGTH * 2 + 1);
     }
 
-    // sha384
+    // sha384初始化
     inline void sha384Init() {
         SHA384_Init(&m_sha384);
     }
 
+    // 向sha384算法中添加数据
     inline void sha384AddData(const char *data) {
         SHA384_Update(&m_sha384, data, strlen(data));
     }
 
+    // 获取sha384哈希结果
     string sha384Result() {
         unsigned char md[SHA384_DIGEST_LENGTH];
         char res[SHA384_DIGEST_LENGTH * 2 + 1];
@@ -197,15 +210,17 @@ private:
         return string(res, SHA384_DIGEST_LENGTH * 2 + 1);
     }
 
-    // sha512
+    // sha512初始化
     inline void sha512Init() {
         SHA512_Init(&m_sha512);
     }
 
+    // 向sha512算法中添加数据
     inline void sha512AddData(const char *data) {
         SHA512_Update(&m_sha512, data, strlen(data));
     }
 
+    // 获取sha512哈希结果
     string sha512Result() {
         unsigned char md[SHA512_DIGEST_LENGTH];
         char res[SHA512_DIGEST_LENGTH * 2 + 1];
@@ -225,9 +240,3 @@ private:
     SHA512_CTX m_sha384;
     SHA512_CTX m_sha512;
 };
-
-
-/* 解释：
-
-
- */
