@@ -16,13 +16,13 @@ enum SignLevel {
     Level6 = NID_sha512
 };
 
-class Cryptographic {
+class RsaCrypto {
 public:
-    Cryptographic() {
+    RsaCrypto() {
         m_publicKey = RSA_new();
         m_privateKey = RSA_new();
     }
-    Cryptographic(string fileName, bool isPrivate = true) {
+    RsaCrypto(string fileName, bool isPrivate = true) {
         m_publicKey = RSA_new();
         m_privateKey = RSA_new();
         if (isPrivate) {
@@ -31,7 +31,7 @@ public:
             initPublicKey(fileName);
         }
     }
-    ~Cryptographic() {
+    ~RsaCrypto() {
         RSA_free(m_publicKey);
         RSA_free(m_privateKey);
     }

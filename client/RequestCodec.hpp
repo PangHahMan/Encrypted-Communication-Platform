@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Codec.hpp"
 #include "Message.pb.hpp"// 包含Protobuf消息定义
 #include <iostream>
@@ -17,11 +16,15 @@ struct RequestInfo {
 // RequestCodec类，继承自Codec基类
 class RequestCodec : public Codec {
 private:
+    string m_encStr; // 编码后的字符串
+    RequestMsg m_msg;// 请求消息对象,protobuf中的类
+
+private:
     // 解码场景的初始化函数
     void initMessage(string encstr) {
         m_encStr = encstr;
     }
-    // 编码场景的初始化函数
+    // 编码场景的初始化函数，初始化protobuf中的数据
     void initMessage(RequestInfo *info) {
         m_msg.set_cmd_type(info->cmd);
         m_msg.set_client_id(info->client_id);
@@ -31,6 +34,7 @@ private:
     }
 
 public:
+    //通过传入info或者str判断是编码还是解码
     RequestCodec() {}
     // 构造函数，用于解码场景，从编码后的字符串构造对象
     RequestCodec(string encstr) {
@@ -55,8 +59,4 @@ public:
 
     // 析构函数
     ~RequestCodec() {}
-
-private:
-    string m_encStr; // 编码后的字符串
-    RequestMsg m_msg;// 请求消息对象,protobuf中的类
 };

@@ -7,12 +7,12 @@ using namespace std;
 
 // 枚举HashType用来表示支持的哈希类型
 enum HashType {
-    MD5,
-    SHA1,
-    SHA224,
-    SHA256,
-    SHA384,
-    SHA512
+    T_MD5,
+    T_SHA1,
+    T_SHA224,
+    T_SHA256,
+    T_SHA384,
+    T_SHA512
 };
 
 class Hash {
@@ -21,22 +21,22 @@ public:
     Hash(HashType type) {
         m_type = type;
         switch (type) {
-            case HashType::MD5:
+            case HashType::T_MD5:
                 md5Init();
                 break;
-            case HashType::SHA1:
+            case HashType::T_SHA1:
                 sha1Init();
                 break;
-            case HashType::SHA224:
+            case HashType::T_SHA224:
                 sha224Init();
                 break;
-            case HashType::SHA256:
+            case HashType::T_SHA256:
                 sha256Init();
                 break;
-            case HashType::SHA384:
+            case HashType::T_SHA384:
                 sha384Init();
                 break;
-            case HashType::SHA512:
+            case HashType::T_SHA512:
                 sha512Init();
                 break;
             default:
@@ -51,22 +51,22 @@ public:
     // 向哈希算法中添加数据
     void addData(string data) {
         switch (m_type) {
-            case HashType::MD5:
+            case HashType::T_MD5:
                 md5AddData(data.data());
                 break;
-            case HashType::SHA1:
+            case HashType::T_SHA1:
                 sha1AddData(data.data());
                 break;
-            case HashType::SHA224:
+            case HashType::T_SHA224:
                 sha224AddData(data.data());
                 break;
-            case HashType::SHA256:
+            case HashType::T_SHA256:
                 sha256AddData(data.data());
                 break;
-            case HashType::SHA384:
+            case HashType::T_SHA384:
                 sha384AddData(data.data());
                 break;
-            case HashType::SHA512:
+            case HashType::T_SHA512:
                 sha512AddData(data.data());
                 break;
             default:
@@ -79,22 +79,22 @@ public:
     string result() {
         string result = string();
         switch (m_type) {
-            case HashType::MD5:
+            case HashType::T_MD5:
                 result = md5Result();
                 break;
-            case HashType::SHA1:
+            case HashType::T_SHA1:
                 result = sha1Result();
                 break;
-            case HashType::SHA224:
+            case HashType::T_SHA224:
                 result = sha224Result();
                 break;
-            case HashType::SHA256:
+            case HashType::T_SHA256:
                 result = sha256Result();
                 break;
-            case HashType::SHA384:
+            case HashType::T_SHA384:
                 result = sha384Result();
                 break;
-            case HashType::SHA512:
+            case HashType::T_SHA512:
                 result = sha512Result();
                 break;
             default:

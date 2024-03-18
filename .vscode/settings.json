@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.inc": "cpp",
-        "memory": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
-}
