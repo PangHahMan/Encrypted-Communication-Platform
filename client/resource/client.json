@@ -2,7 +2,7 @@
     "client_id":"BJ-ChangPing-TBD",
     "server_id":"BJ-QianMen-001",
     "server_ip":"127.0.0.1",
-    "port":8989,
-    "maxNode":1,
-    "shmKey":"/usr/local/bin"
+    "server_port":8888,
+    "max_node":1,
+    "shm_key":"/usr/local/bin"
 }

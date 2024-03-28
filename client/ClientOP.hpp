@@ -6,11 +6,11 @@
 #include "RespondCodec.hpp"
 #include "RespondFactory.hpp"
 #include "RsaCrypto.hpp"
+#include "SecKeyShm.hpp"
 #include "TcpSocket.hpp"
 #include <fstream>
 #include <iostream>
 #include <json/json.h>
-
 #include <sstream>
 #include <string>
 using namespace std;
@@ -26,7 +26,6 @@ struct ClientInfo {
 class ClientOP {
 public:
     ClientOP(string jsonFile) {
-        cout << "开始解析文件" << endl;
         // 解析json文件, 读文件 -> Value
         ifstream ifs(jsonFile);
         Reader r;
@@ -34,13 +33,27 @@ public:
         r.parse(ifs, root);
         // 将root中的键值对value值取出
         m_info.server_id = root["server_id"].asString();
-        m_info.client_id = root["client_Id"].asString();
+        m_info.client_id = root["client_id"].asString();
         m_info.ip = root["server_ip"].asString();
-        m_info.port = root["port"].asInt();
+        m_info.port = root["server_port"].asInt();
 
-        cout << "server_id:" << m_info.server_id << endl;
+        // 实例化共享内存对象
+        // 从配置文件中读 key/pathname
+        string shmKey = root["shm_key"].asString();
+        int maxNode = root["max_node"].asInt();
+        // 客户端存储的秘钥只有一个
+        m_shm = new SecKeyShm(shmKey, maxNode);
+
+        cout << "server_id:" << m_info.server_id << endl
+             << "client_id:" << m_info.client_id << endl
+             << "ip:" << m_info.ip << endl
+             << "port:" << m_info.port << endl
+             << "shmKey:" << shmKey << endl
+             << "maxNode:" << maxNode << endl;
     }
-    ~ClientOP() {}
+    ~ClientOP() {
+        delete m_shm;
+    }
 
     // 秘钥协商
     bool seckeyAgree() {
@@ -100,6 +113,13 @@ public:
         string key = rsa.rsaPriKeyDecrypt(resData->data());
         cout << "对称加密的秘钥: " << key << endl;
         // 秘钥写入共享内存中
+        NodeSecKeyInfo info;
+        strcpy(info.clientID, m_info.client_id.data());
+        strcpy(info.serverID, m_info.server_id.data());
+        strcpy(info.seckey, key.data());
+        info.seckeyID = resData->seckey_id();
+        info.status = true;
+        m_shm->shmWrite(&info);
 
         delete factory;
         delete c;
@@ -118,4 +138,5 @@ public:
 
 private:
     ClientInfo m_info;
+    SecKeyShm *m_shm;
 };

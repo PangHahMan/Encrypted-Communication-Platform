@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
-#include <openssl/bio.h> // OpenSSL的BIO库头文件
-#include <openssl/err.h> // OpenSSL的错误处理库头文件
-#include <openssl/pem.h> // OpenSSL的PEM格式处理库头文件
-#include <openssl/rsa.h> // OpenSSL的RSA加密库头文件
+#include <openssl/bio.h> 
+#include <openssl/err.h> 
+#include <openssl/pem.h> 
+#include <openssl/rsa.h> 
 #include <string>
 using namespace std;
 
@@ -47,7 +47,7 @@ public:
         BIO *pubIO = BIO_new_file(pub.data(), "w");
         PEM_write_bio_RSAPublicKey(pubIO, r);
         BIO_flush(pubIO); // 刷新缓冲区
-        BIO_free(pubIO); // 释放BIO对象
+        BIO_free(pubIO); // 释放BIO对象 
 
         // 将私钥写入文件
         BIO *priBio = BIO_new_file(pri.data(), "w");
